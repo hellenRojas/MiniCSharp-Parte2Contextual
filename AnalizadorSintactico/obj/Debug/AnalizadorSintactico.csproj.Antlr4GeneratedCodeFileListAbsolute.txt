@@ -1,0 +1,6 @@
+C:\Users\USUARIO1\Desktop\MiniCSharp-Parte1\AnalizadorSintactico\obj\Debug\Lexer1.cs
+C:\Users\USUARIO1\Desktop\MiniCSharp-Parte1\AnalizadorSintactico\obj\Debug\Parser1.cs
+C:\Users\USUARIO1\Desktop\MiniCSharp-Parte1\AnalizadorSintactico\obj\Debug\Parser1Listener.cs
+C:\Users\USUARIO1\Desktop\MiniCSharp-Parte1\AnalizadorSintactico\obj\Debug\Parser1BaseListener.cs
+C:\Users\USUARIO1\Desktop\MiniCSharp-Parte1\AnalizadorSintactico\obj\Debug\Parser1Visitor.cs
+C:\Users\USUARIO1\Desktop\MiniCSharp-Parte1\AnalizadorSintactico\obj\Debug\Parser1BaseVisitor.cs

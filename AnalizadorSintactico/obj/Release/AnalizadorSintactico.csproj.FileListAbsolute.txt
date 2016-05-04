@@ -1,0 +1,10 @@
+C:\Users\USUARIO1\Desktop\MiniCSharp-Parte1\AnalizadorSintactico\bin\Release\AnalizadorSintactico.exe.config
+C:\Users\USUARIO1\Desktop\MiniCSharp-Parte1\AnalizadorSintactico\obj\Release\Lexer1.cs
+C:\Users\USUARIO1\Desktop\MiniCSharp-Parte1\AnalizadorSintactico\obj\Release\Parser1.cs
+C:\Users\USUARIO1\Desktop\MiniCSharp-Parte1\AnalizadorSintactico\obj\Release\Parser1Listener.cs
+C:\Users\USUARIO1\Desktop\MiniCSharp-Parte1\AnalizadorSintactico\obj\Release\Parser1BaseListener.cs
+C:\Users\USUARIO1\Desktop\MiniCSharp-Parte1\AnalizadorSintactico\obj\Release\Parser1Visitor.cs
+C:\Users\USUARIO1\Desktop\MiniCSharp-Parte1\AnalizadorSintactico\obj\Release\Parser1BaseVisitor.cs
+C:\Users\USUARIO1\Desktop\MiniCSharp-Parte1\AnalizadorSintactico\obj\Release\AnalizadorSintactico.csproj.Antlr4GeneratedCodeFileListAbsolute.txt
+C:\Users\USUARIO1\Desktop\MiniCSharp-Parte1\AnalizadorSintactico\obj\Release\AnalisisSintactico.Form1.resources
+C:\Users\USUARIO1\Desktop\MiniCSharp-Parte1\AnalizadorSintactico\obj\Release\AnalizadorSintactico.csproj.GenerateResource.Cache
