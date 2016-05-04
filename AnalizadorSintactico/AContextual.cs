@@ -19,7 +19,7 @@ class AContextual : Parser1BaseVisitor<Object>
     public TablaMetodos tableMethods; // Tabla de metodos
     int tablaActual = 0; // si es 1 se debe insertar en la tabla de clases
     public int nivelActual = 0;
-    string nombreMetodo_Llamada =""; // variable que guarda el nombre del metodo actual; se necesita en el designator
+    string nombreMetodo_Llamada = ""; // variable que guarda el nombre del metodo actual; se necesita en el designator
     bool tRetorno = true;
     bool retornoFun = false;
     string banderaClaseVar = "";
@@ -41,13 +41,13 @@ class AContextual : Parser1BaseVisitor<Object>
 
     public override object VisitProgramAST([NotNull] Parser1.ProgramASTContext context)
     {
-        string [] tipos = { "array[]"};
-        string [] tipCH = {"int"};
+        string[] tipos = { "array[]" };
+        string[] tipCH = { "int" };
         string[] tipOrd = { "char" };
-        tableMethods.insertar("len","int",tipos);
+        tableMethods.insertar("len", "int", tipos);
         tableMethods.insertar("chr", "char", tipCH);
         tableMethods.insertar("ord", "int", tipOrd);
-        table.insertar("null",0,"null","");
+        table.insertar("null", 0, "null", "");
         if (context.classDecl() != null)
         {
             for (int i = 0; i < context.classDecl().Count(); i++)
@@ -69,7 +69,7 @@ class AContextual : Parser1BaseVisitor<Object>
                 Visit(context.varDecl(i));
             }
         }
-        
+
         for (int i = 0; i < context.methodDecl().Count(); i++)
         {
             Visit(context.methodDecl(i));
@@ -87,16 +87,16 @@ class AContextual : Parser1BaseVisitor<Object>
         context.CONSTANTE();
         try
         {
-             tipoC1 = (string)Visit(context.type());
-        
+            tipoC1 = (string)Visit(context.type());
+
             if (tipoC1 != "int" && tipoC1 != "char")
             {
                 Console.WriteLine("Tipo no permitido: " + tipoC1);
-                 msgError = msgError + "Linea: " + context.CONSTANTE().Symbol.Line + "-> Tipo no permitido: " + tipoC1 + "\n";
-                 return null;
+                msgError = msgError + "Linea: " + context.CONSTANTE().Symbol.Line + "-> Tipo no permitido: " + tipoC1 + "\n";
+                return null;
             }
             string id = context.ID().GetText();
-            
+
             table.insertar(id, nivelActual, tipoC1, "const");
             string tipoC2 = null;
             if (context.NUMBER() != null)
@@ -120,15 +120,16 @@ class AContextual : Parser1BaseVisitor<Object>
             }
 
 
-            
+
         }
-           catch(Exception e ){
+        catch (Exception e)
+        {
             Console.WriteLine(e.Message);
             msgError = msgError + e.Message + "\n";
         };
 
         return null;
-       
+
 
     }
 
@@ -136,54 +137,56 @@ class AContextual : Parser1BaseVisitor<Object>
     public override object VisitVarDeclAST([NotNull] Parser1.VarDeclASTContext context)
     {
         string tipo;
-        try{
-             tipo = (string)Visit(context.type());
+        try
+        {
+            tipo = (string)Visit(context.type());
 
-             if (tablaActual == 1)
-             {
-                 for (int i = 0; i <= context.ID().Length - 1; i++)
-                 {
+            if (tablaActual == 1)
+            {
+                for (int i = 0; i <= context.ID().Length - 1; i++)
+                {
 
 
-                     if (tableClases.buscarPNombreUltima(context.ID(i).GetText()) == null)
-                     {
-                         tableClases.insertarVariable(context.ID(i).GetText(),tipo);
-                     }
-                     else
-                     {
-                        throw new Exception("Linea: "+ context.ID(i).Symbol.Line+"-> La variable " + context.ID(i).GetText() + " ya esta definida");
-              
-                     }
-                 }
+                    if (tableClases.buscarPNombreUltima(context.ID(i).GetText()) == null)
+                    {
+                        tableClases.insertarVariable(context.ID(i).GetText(), tipo);
+                    }
+                    else
+                    {
+                        throw new Exception("Linea: " + context.ID(i).Symbol.Line + "-> La variable " + context.ID(i).GetText() + " ya esta definida");
 
-               
-             }
-             else
-             {
+                    }
+                }
 
-                 for (int i = 0; i <= context.ID().Length - 1; i++)
-                 {
-                     if (table.buscar(context.ID(i).GetText()) == null)
-                     {
-                         table.insertar(context.ID(i).GetText(), nivelActual, tipo, "var");
-                     }
-                     else
-                     {
-                         throw new Exception("Linea: " + context.ID(i).Symbol.Line + "-> La variable " + context.ID(i).GetText() + " ya esta definida");
-            
-                     }
 
-                 }
+            }
+            else
+            {
 
-             }
-        
-      
+                for (int i = 0; i <= context.ID().Length - 1; i++)
+                {
+                    if (table.buscar(context.ID(i).GetText()) == null)
+                    {
+                        table.insertar(context.ID(i).GetText(), nivelActual, tipo, "var");
+                    }
+                    else
+                    {
+                        throw new Exception("Linea: " + context.ID(i).Symbol.Line + "-> La variable " + context.ID(i).GetText() + " ya esta definida");
+
+                    }
+
+                }
+
+            }
+
+
         }
-        catch(Exception e){
+        catch (Exception e)
+        {
 
             msgError = msgError + e.Message + "\n";
         }
-      
+
 
         return null;
 
@@ -198,10 +201,11 @@ class AContextual : Parser1BaseVisitor<Object>
         if (tableClases.buscarCl(idClass) != null)
         {
 
-            msgError = msgError +"Linea: " + context.ID().Symbol.Line + "-> "+"La clase " + context.ID().GetText() + " ya esta definida" + "\n";
+            msgError = msgError + "Linea: " + context.ID().Symbol.Line + "-> " + "La clase " + context.ID().GetText() + " ya esta definida" + "\n";
 
         }
-        else{
+        else
+        {
             tableClases.insertarClase(idClass);
             if (context.varDecl() != null)
             {
@@ -231,7 +235,7 @@ class AContextual : Parser1BaseVisitor<Object>
         idMethod = context.ID().GetText();
 
         // VALIDAR SI YA EXISTE
-        if(tableMethods.buscarPNombre(idMethod)!= null)
+        if (tableMethods.buscarPNombre(idMethod) != null)
         {
             Console.WriteLine("Ya existe un método con el id " + idMethod); // si el método ya existe retorna null
             msgError = msgError + "Linea: " + context.ID().Symbol.Line + "-> " + "Ya existe un método con el id " + idMethod + "\n";
@@ -252,7 +256,7 @@ class AContextual : Parser1BaseVisitor<Object>
                 tipoMethod = (string)Visit(context.type());
             }
 
-         
+
             //  PARAMETROS
 
             context.PIZQ();
@@ -269,7 +273,7 @@ class AContextual : Parser1BaseVisitor<Object>
             //INSETAR EL MÉTODO EN LA TABLA
             tableMethods.insertar(idMethod, tipoMethod, arrayTipos);// Inserta el método en la tablaMetodos
             nombreMetodo_Llamada = idMethod;
-            
+
 
 
             // DECLARACIÓN DE VARIABLES 
@@ -284,24 +288,25 @@ class AContextual : Parser1BaseVisitor<Object>
             }
 
             // VISITAR EL BLOQUE 
-        
+
 
             Visit(context.block());
-            if (tipoMethod != "void" && retornoFun == false) {
-                    throw new Exception("Linea: " + context.ID().Symbol.Line + "-> " + "Error esta función debe tener retorno");
+            if (tipoMethod != "void" && retornoFun == false)
+            {
+                throw new Exception("Linea: " + context.ID().Symbol.Line + "-> " + "Error esta función debe tener retorno");
             }
-            
+
             if (tipoMethod == "void" && retornoFun == true)
             {
                 throw new Exception("Linea: " + context.ID().Symbol.Line + "-> " + "Error función no debe tener retorno");
             }
-            
+
 
             retornoFun = false;
-            
-            
+
+
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             msgError = msgError + e.Message + "\n";
             retornoFun = false;
@@ -343,7 +348,7 @@ class AContextual : Parser1BaseVisitor<Object>
 
             return list;
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new Exception(e.Message);
         }
@@ -399,7 +404,8 @@ class AContextual : Parser1BaseVisitor<Object>
                 var = "boolean";
             }
         }
-        else {
+        else
+        {
             if (tableClases.buscarCl(context.ID().GetText()) != null)
             {
                 if (context.PCUADRADO_IZQ() == null)
@@ -408,11 +414,12 @@ class AContextual : Parser1BaseVisitor<Object>
                 }
                 else
                 {
-                    throw new Exception("Linea: " + context.ID().Symbol.Line + "-> "+"No existe arreglos tipo clase"); // si el tipo es indefinido
+                    throw new Exception("Linea: " + context.ID().Symbol.Line + "-> " + "No existe arreglos tipo clase"); // si el tipo es indefinido
                 }
-               
+
             }
-            else {
+            else
+            {
                 throw new Exception("Linea: " + context.ID().Symbol.Line + "-> " + "No existe este tipo de dato"); // si el tipo es indefinido
             }
         }
@@ -430,7 +437,7 @@ class AContextual : Parser1BaseVisitor<Object>
             if (tipoID == "null")
             {
                 throw new Exception("Linea: " + context.ASIGN().Symbol.Line + "-> " + "Error no se puede asignar algo a la palabra reservada null");
-           }
+            }
 
             if (context.ASIGN() != null)
             {
@@ -445,15 +452,15 @@ class AContextual : Parser1BaseVisitor<Object>
                 {
                     throw new Exception("Linea: " + context.ASIGN().Symbol.Line + "-> " + "No se le pueden asignar valores a una constante");
                 }
-                
-                 if (tipoExpre != tipoID && tipoID != "null")
-                 {
-                     throw new Exception("Linea: " + context.ASIGN().Symbol.Line + "-> " + "Tipos Incompatibles ( " + tipoID + "," + tipoExpre + ")");
-                 }
 
-                 esNew = false;
+                if (tipoExpre != tipoID && tipoID != "null")
+                {
+                    throw new Exception("Linea: " + context.ASIGN().Symbol.Line + "-> " + "Tipos Incompatibles ( " + tipoID + "," + tipoExpre + ")");
+                }
+
+                esNew = false;
             }
-               //*************************************************
+            //*************************************************
             else if (context.PIZQ() != null && tipoID == "metodo")
             {
                 TablaMetodos.ElementoMet met = tableMethods.buscarPNombre(nombreMetodo_Llamada);
@@ -461,11 +468,12 @@ class AContextual : Parser1BaseVisitor<Object>
                 string[] arrTiposParam = null;
                 if (context.actPars() != null)
                 {
-                     arrTiposParam = (string[])Visit(context.actPars());// arreglo de tipos de parametros
+                    arrTiposParam = (string[])Visit(context.actPars());// arreglo de tipos de parametros
                 }
-                else {
+                else
+                {
                     arrTiposParam = new string[0];
-                    
+
                 }
                 string idMethod = nombreMetodo_Llamada;// nombre del método
                 if (met.numPara != arrTiposParam.Length)
@@ -480,7 +488,7 @@ class AContextual : Parser1BaseVisitor<Object>
                     {
                         if (met.tiposPara[i] == "array[]")
                         {
-                            if (arrTiposParam[i] != "char[]" && arrTiposParam[i] != "int[]" )
+                            if (arrTiposParam[i] != "char[]" && arrTiposParam[i] != "int[]")
                             {
                                 throw new Exception("Linea: " + context.PIZQ().Symbol.Line + "-> " + "Tipos de parametros no son los  correctos");
                             }
@@ -510,10 +518,11 @@ class AContextual : Parser1BaseVisitor<Object>
                 }
             }
 
-           
+
         }
-        catch(Exception e){
-            Console.WriteLine( e.Message);
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
             msgError = msgError + e.Message + "\n";
         }
         return null;
@@ -525,10 +534,10 @@ class AContextual : Parser1BaseVisitor<Object>
         context.PIZQ();
         //Entrando el retorno es falso
         tRetorno = false;
-     
-            Visit(context.condition());
 
-         try
+        Visit(context.condition());
+
+        try
         {
             context.PDER();
 
@@ -539,27 +548,29 @@ class AContextual : Parser1BaseVisitor<Object>
             }
             Visit(context.statement(0));
 
-             
+
             if (context.CONDICION_ELSE() != null)
             {
                 // En el else se erifica que el if tuviera return
                 if (retornoFun == false)
                 {
-                //En caso de no ser asi ya no existe posibilidad deque el retorno sea correcto
+                    //En caso de no ser asi ya no existe posibilidad deque el retorno sea correcto
                     tRetorno = false;
                 }
-                else {
-                // De lo contrarios la variable retorno se vuelve al estado original
+                else
+                {
+                    // De lo contrarios la variable retorno se vuelve al estado original
                     retornoFun = false;
-                // Y la posibilidad de que el retorno se presente vuelve a ser positivo
+                    // Y la posibilidad de que el retorno se presente vuelve a ser positivo
                     tRetorno = true;
                 }
                 Visit(context.statement(1));
                 tRetorno = true;
             }
-           
-         } 
-        catch(Exception e){
+
+        }
+        catch (Exception e)
+        {
             tRetorno = true;
             msgError = msgError + e.Message + "\n";
         }
@@ -569,14 +580,14 @@ class AContextual : Parser1BaseVisitor<Object>
     public override object VisitForStatAST([NotNull] Parser1.ForStatASTContext context)
     {
         tRetorno = false;
-       context.CICLO_FOR();
-            context.PIZQ();
-            Visit(context.expr());
-            context.PyCOMA();
-            if (context.condition() != null)
-            {
-                Visit(context.condition());
-            }
+        context.CICLO_FOR();
+        context.PIZQ();
+        Visit(context.expr());
+        context.PyCOMA();
+        if (context.condition() != null)
+        {
+            Visit(context.condition());
+        }
 
         try
         {
@@ -595,9 +606,9 @@ class AContextual : Parser1BaseVisitor<Object>
                 Visit(context.statement(0));
                 tRetorno = true;
             }
-           
+
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             tRetorno = true;
             Console.WriteLine(e.Message);
@@ -608,24 +619,24 @@ class AContextual : Parser1BaseVisitor<Object>
     public override object VisitWhileStatAST([NotNull] Parser1.WhileStatASTContext context)
     {
         tRetorno = false;
-        
-            context.CICLO_WHILE();
-            context.PIZQ();
-            Visit(context.condition());
-            context.PDER();
+
+        context.CICLO_WHILE();
+        context.PIZQ();
+        Visit(context.condition());
+        context.PDER();
         try
         {
             Visit(context.statement());
             tRetorno = true;
-            
+
         }
-         catch (Exception e)
-         {
-             tRetorno = true;
-             Console.WriteLine(e.Message);
-             msgError = msgError + e.Message + "\n";
-         }
-         return null;
+        catch (Exception e)
+        {
+            tRetorno = true;
+            Console.WriteLine(e.Message);
+            msgError = msgError + e.Message + "\n";
+        }
+        return null;
     }
     //FALTA
     public override object VisitForeachStatAST([NotNull] Parser1.ForeachStatASTContext context)
@@ -644,7 +655,7 @@ class AContextual : Parser1BaseVisitor<Object>
                 throw new Exception("Linea: " + context.PIZQ().Symbol.Line + "-> " + "Error solo se admiten variables tipo int y char");
             }
 
-            if ((tipo == "int" && expr != "int[]") || (tipo == "char" && expr != "char[]") )
+            if ((tipo == "int" && expr != "int[]") || (tipo == "char" && expr != "char[]"))
             {
                 throw new Exception("Linea: " + context.PIZQ().Symbol.Line + "-> " + "Error la variable debe ser del mismo tipo del arreglo");
             }
@@ -653,17 +664,18 @@ class AContextual : Parser1BaseVisitor<Object>
         }
         catch (Exception e)
         {
-             tRetorno = true;
+            tRetorno = true;
             Console.WriteLine(e.Message);
             msgError = msgError + e.Message + "\n";
 
         }
-         return null;
+        return null;
     }
 
     public override object VisitReturnStatAST([NotNull] Parser1.ReturnStatASTContext context)
     {
-        if (tRetorno == true) {
+        if (tRetorno == true)
+        {
             retornoFun = true;
         }
         try
@@ -730,7 +742,7 @@ class AContextual : Parser1BaseVisitor<Object>
     public override object VisitBlockStatAST([NotNull] Parser1.BlockStatASTContext context)
     {
         Visit(context.block());
-        
+
         return null;
     }
 
@@ -761,7 +773,8 @@ class AContextual : Parser1BaseVisitor<Object>
 
             return tipos.ToArray();
         }
-        catch(Exception e){
+        catch (Exception e)
+        {
             throw new Exception(e.Message);
         }
     }
@@ -787,8 +800,8 @@ class AContextual : Parser1BaseVisitor<Object>
         }
         catch (Exception e)
         {
-            msgError = msgError  + e.Message + "\n";
- 
+            msgError = msgError + e.Message + "\n";
+
         }
         return null;
     }
@@ -809,12 +822,12 @@ class AContextual : Parser1BaseVisitor<Object>
             }
             return null;
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new Exception(e.Message);
         }
 
-        
+
     }
 
 
@@ -851,7 +864,7 @@ class AContextual : Parser1BaseVisitor<Object>
             }
             else
             {
-                throw new Exception( "Linea: " + lineaActual + "-> Los dos tipos a comparar no son del mismo tipo");
+                throw new Exception("Linea: " + lineaActual + "-> Los dos tipos a comparar no son del mismo tipo");
                 //Lanzar exe
                 // return false;
             }
@@ -887,19 +900,20 @@ class AContextual : Parser1BaseVisitor<Object>
                 if ((tipo1 != "int") && (tipo2 != "float"))
                 {
                     throw new Exception("Linea: " + lineaActual + " -> Error: Esta operación solo se puede hacer con float e int");
-                    
+
                 }
                 tipo1 = tipo2;
 
             }
-             return tipo1;
+            return tipo1;
         }
-       
-    
-    catch(Exception e){
-        throw new Exception(e.Message);
-    }
-     
+
+
+        catch (Exception e)
+        {
+            throw new Exception(e.Message);
+        }
+
     }
     //************************************************  TERMINALES *************************************************************
 
@@ -918,12 +932,12 @@ class AContextual : Parser1BaseVisitor<Object>
                 if (tipo1 != tipo2)
                 {
                     throw new Exception("Linea: " + lineaActual + " -> Tipos Incompatibles (" + tipo1 + ", " + tipo2 + ")");
-                
+
                 }
                 if ((tipo1 != "int") && (tipo2 != "float"))
                 {
                     throw new Exception("Linea: " + lineaActual + " -> Error esta operación solo se puede hacer con float e int");
-                
+
                 }
                 tipo1 = tipo2;
 
@@ -935,7 +949,7 @@ class AContextual : Parser1BaseVisitor<Object>
         {
             throw new Exception(e.Message);
         }
-  
+
     }
 
     //************************************************  FACTOR *************************************************************
@@ -974,7 +988,7 @@ class AContextual : Parser1BaseVisitor<Object>
                     {
                         if (met.tiposPara[i] == "array[]")
                         {
-                            if (arrTiposParam[i] != "char[]" && arrTiposParam[i] != "int[]"  )
+                            if (arrTiposParam[i] != "char[]" && arrTiposParam[i] != "int[]")
                             {
                                 throw new Exception("Linea: " + context.PIZQ().Symbol.Line + "-> " + "Tipo de parametros no son los  correctos");
                             }
@@ -999,7 +1013,8 @@ class AContextual : Parser1BaseVisitor<Object>
                 return tipoid;
             }
         }
-        catch(Exception e) {
+        catch (Exception e)
+        {
             throw new Exception(e.Message);
         }
     }
@@ -1082,10 +1097,10 @@ class AContextual : Parser1BaseVisitor<Object>
         {
             if (context.PCUADRADO_IZQ() != null)
             {
-             
-                    throw new Exception("Linea: " + context.ID().Symbol.Line + "-> " + "Error no existen arreglos tipo float");
-  
-      
+
+                throw new Exception("Linea: " + context.ID().Symbol.Line + "-> " + "Error no existen arreglos tipo float");
+
+
             }
             else
             {
@@ -1098,9 +1113,10 @@ class AContextual : Parser1BaseVisitor<Object>
             {
                 throw new Exception("Linea: " + context.ID().Symbol.Line + "-> " + "Error no existen arreglos tipo boolean");
             }
-  
+
         }
-        else {
+        else
+        {
             if (tableClases.buscarCl(context.ID().GetText()) != null)
             {
                 if (context.PCUADRADO_IZQ() != null)
@@ -1111,7 +1127,8 @@ class AContextual : Parser1BaseVisitor<Object>
                 else
                     var = tableClases.buscarCl(context.ID().GetText()).nombre;
             }
-            else {
+            else
+            {
                 throw new Exception("Linea: " + context.ID().Symbol.Line + "Error no existe este tipo de dato");
 
             }
@@ -1134,40 +1151,43 @@ class AContextual : Parser1BaseVisitor<Object>
         string tipoARet = context.ID(0).GetText();
         // si hay mas de dos ID
         if (context.ID(1) != null && table.buscar(context.ID(0).GetText()) != null)
-        {   
+        {
             string tipo = table.buscar(context.ID(0).GetText()).tipo;
-             // Si el primer elemento es de tipo clase
-             if (tipo != "int" && tipo != "char" && tipo != "float"
-                && tipo != "int[]" && tipo != "char[]" )
+            // Si el primer elemento es de tipo clase
+            if (tipo != "int" && tipo != "char" && tipo != "float"
+               && tipo != "int[]" && tipo != "char[]")
             {
                 tipoARet = tipo;
                 string tipoAnt = tipoARet;
                 //Recorrido de los ID
                 for (int i = 1; i < context.ID().Length; i++)
                 {
-                    if (i > 1) {
+                    if (i > 1)
+                    {
 
                         tipoAnt = tipoARet;
                     }
 
                     if (tipoAnt != "int" && tipoAnt != "char" && tipoAnt != "float"
-                        && tipoAnt != "int[]" && tipoAnt != "char[]"  )// significa q es tipo clase
+                        && tipoAnt != "int[]" && tipoAnt != "char[]")// significa q es tipo clase
                     {
 
                         if (tableClases.buscarPNombre(context.ID(i).GetText(), tipoAnt) == null) // si el atributo pertenece a la clase
                         {
                             throw new Exception("Linea: " + context.ID(i).Symbol.Line + "-> No existe el atributo " + context.ID(i).GetText() + " en la clase " + tipoAnt);
-                            
+
                         }
-                        else {
+                        else
+                        {
                             //si la variable tiene expresion
                             if (context.expr(0) != null)
                             {
-                                if (context.expr(1) != null) {
+                                if (context.expr(1) != null)
+                                {
                                     throw new Exception("Linea: " + context.ID(i).Symbol.Line + "-> Solo existen arreglos simples");
                                 }
 
-                                string  elem = tableClases.buscarPNombre(context.ID(i).GetText(), tipoAnt).tipo; ;
+                                string elem = tableClases.buscarPNombre(context.ID(i).GetText(), tipoAnt).tipo; ;
                                 //si es de tipo array int o char
                                 if (elem == "int[]" || elem == "char[]")
                                 {
@@ -1184,10 +1204,11 @@ class AContextual : Parser1BaseVisitor<Object>
                                         {
                                             return "int";
                                         }
-                                        else{
+                                        else
+                                        {
                                             return "char";
                                         }
-                                       
+
                                     }
 
                                 }
@@ -1200,38 +1221,40 @@ class AContextual : Parser1BaseVisitor<Object>
 
                             }
 
-                            else {
+                            else
+                            {
                                 tipoARet = tableClases.buscarPNombre(context.ID(i).GetText(), tipoAnt).tipo; ;
-                            
+
                             }
-                           
+
                         }
                     }
                     else
                     {
-                        throw new Exception("Linea: " + context.ID(i).Symbol.Line + "-> La variable " + context.ID(i-1).GetText()+ " no es de tipo clase");
-                        
+                        throw new Exception("Linea: " + context.ID(i).Symbol.Line + "-> La variable " + context.ID(i - 1).GetText() + " no es de tipo clase");
+
                     }
                 }
                 return tipoARet;
             }
-            else {
-                throw new Exception("Linea: " + context.ID(0).Symbol.Line + "-> Variable " + context.ID(0).GetText()+ " no es tipo clase");
-           
+            else
+            {
+                throw new Exception("Linea: " + context.ID(0).Symbol.Line + "-> Variable " + context.ID(0).GetText() + " no es tipo clase");
+
             }
-              
-            
+
+
         }
         else if (context.expr(0) != null)
-
         {
             if (context.expr(1) != null)
             {
                 throw new Exception("Linea: " + context.ID(0).Symbol.Line + "-> Solo existen arreglos simples");
             }
-             TablaSimbolos.ElementoG elem = table.buscar(context.ID(0).ToString());
+            TablaSimbolos.ElementoG elem = table.buscar(context.ID(0).ToString());
             //si no existe la variable
-            if(elem == null){
+            if (elem == null)
+            {
                 throw new Exception("Linea: " + context.ID(0).Symbol.Line + "-> No existe un arreglo con ese ID");
             }
             //si es de tipo array int o char
@@ -1259,15 +1282,16 @@ class AContextual : Parser1BaseVisitor<Object>
 
             }
             //si no es de tipo array int o char
-            else {
+            else
+            {
                 throw new Exception("Linea: " + lineaActual + "-> La variable no es de tipo arreglo");
             }
-           
-           
+
+
         }
         else
         {
-   
+
             TablaSimbolos.ElementoG elem = table.buscar(context.ID(0).ToString());
 
             TablaMetodos.ElementoMet elem2 = tableMethods.buscarPNombre(context.ID(0).ToString());
@@ -1282,7 +1306,7 @@ class AContextual : Parser1BaseVisitor<Object>
                 return "metodo";
             }
             else
-            {   
+            {
                 throw new Exception("Linea: " + context.ID(0).Symbol.Line + "-> Variable " + context.ID(0).ToString() + " no definida");
             }
         }
@@ -1326,35 +1350,40 @@ class AContextual : Parser1BaseVisitor<Object>
         return "<=";
     }
 
-   public override object VisitMulMulopAST([NotNull] Parser1.MulMulopASTContext context){
-       lineaActual = context.MUL().Symbol.Line;
-       return "*";
-   }
-   public override object VisitDivMulopAST([NotNull] Parser1.DivMulopASTContext context){
-       lineaActual = context.DIV().Symbol.Line;
-       return "/";
-   }
-   public override object VisitDivmodMulopAST([NotNull] Parser1.DivmodMulopASTContext context){
-       lineaActual = context.DIVMOD().Symbol.Line;
-       return "%";
-   }
-   public override object VisitSumaAddopAST([NotNull] Parser1.SumaAddopASTContext context){
-       lineaActual = context.SUMA().Symbol.Line;
-       return "+";
-   }
+    public override object VisitMulMulopAST([NotNull] Parser1.MulMulopASTContext context)
+    {
+        lineaActual = context.MUL().Symbol.Line;
+        return "*";
+    }
+    public override object VisitDivMulopAST([NotNull] Parser1.DivMulopASTContext context)
+    {
+        lineaActual = context.DIV().Symbol.Line;
+        return "/";
+    }
+    public override object VisitDivmodMulopAST([NotNull] Parser1.DivmodMulopASTContext context)
+    {
+        lineaActual = context.DIVMOD().Symbol.Line;
+        return "%";
+    }
+    public override object VisitSumaAddopAST([NotNull] Parser1.SumaAddopASTContext context)
+    {
+        lineaActual = context.SUMA().Symbol.Line;
+        return "+";
+    }
 
-   public override object VisitRestaAddopAST([NotNull] Parser1.RestaAddopASTContext context) {
-       lineaActual = context.RESTA().Symbol.Line;
-       return "-";
-   }
+    public override object VisitRestaAddopAST([NotNull] Parser1.RestaAddopASTContext context)
+    {
+        lineaActual = context.RESTA().Symbol.Line;
+        return "-";
+    }
 
 
-//: MUL																							#mulMulopAST
-//| DIV																							#divMulopAST
-//| DIVMOD																						#divmodMulopAST
+    //: MUL																							#mulMulopAST
+    //| DIV																							#divMulopAST
+    //| DIVMOD																						#divmodMulopAST
 
-//: SUMA																							#sumaAddopAST
-//| RESTA																							#restaAddopAST
+    //: SUMA																							#sumaAddopAST
+    //| RESTA																							#restaAddopAST
 
 
 

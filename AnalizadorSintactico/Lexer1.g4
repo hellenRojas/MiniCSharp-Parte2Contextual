@@ -8,7 +8,7 @@ NEWLINE
 ;
 
 COMMMETBLOCK
-: ('/*' ('0'..'9'|'A'..'Z'| 'a'..'z'|'\n'|'\r'|'\t'|' '|CARACTERESCOMENTBLOCK|COMMMETBLOCK)* '*/')-> channel(HIDDEN)
+: ('/*' ('0'..'9'|'A'..'Z'| 'a'..'z'|'\n'|'\r'|'\t'|' ' |CARACTERESCOMENTBLOCK|COMMMETBLOCK)* '*/')-> channel(HIDDEN)
 ;
 
 
@@ -133,6 +133,7 @@ TECHO:'^';
 SALTO:'\\n';
 RETCARR:'\\r';
 TAB:'\\t';
+COMILLA: '\'';
 
 STRI
 : COMILLADOBLE  (LETTER|DIGIT|PrintableChar|'\r'|' ')* COMILLADOBLE
@@ -194,6 +195,7 @@ CARACTERESCOMENTBLOCK
 | SALTO
 |RETCARR
 |TAB
+|COMILLA
 ;
 
 
