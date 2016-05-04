@@ -58,3 +58,16 @@ C:\Users\USUARIO1\Dropbox\TECNOLÓGICO\VII Semestre\Compiladores\Proyectos\MiniC
 C:\Users\USUARIO1\Dropbox\TECNOLÓGICO\VII Semestre\Compiladores\Proyectos\MiniCSharp-Parte1\AnalizadorSintactico\obj\Debug\AnalisisSintactico.Form1.resources
 C:\Users\USUARIO1\Dropbox\TECNOLÓGICO\VII Semestre\Compiladores\Proyectos\MiniCSharp-Parte1\AnalizadorSintactico\obj\Debug\AnalizadorSintactico.csproj.GenerateResource.Cache
 C:\Users\USUARIO1\Desktop\MiniCSharp-Parte1\AnalizadorSintactico\obj\Debug\AnalizadorSintactico.csprojResolveAssemblyReference.cache
+C:\Users\USUARIO1\Dropbox\TECNOLÓGICO\VII Semestre\Compiladores\Proyectos\MiniCSharp-Parte2Contextual\AnalizadorSintactico\bin\Debug\AnalizadorSintactico.exe.config
+C:\Users\USUARIO1\Dropbox\TECNOLÓGICO\VII Semestre\Compiladores\Proyectos\MiniCSharp-Parte2Contextual\AnalizadorSintactico\obj\Debug\AnalizadorSintactico.exe
+C:\Users\USUARIO1\Dropbox\TECNOLÓGICO\VII Semestre\Compiladores\Proyectos\MiniCSharp-Parte2Contextual\AnalizadorSintactico\obj\Debug\AnalizadorSintactico.pdb
+C:\Users\USUARIO1\Dropbox\TECNOLÓGICO\VII Semestre\Compiladores\Proyectos\MiniCSharp-Parte2Contextual\AnalizadorSintactico\bin\Debug\AnalizadorSintactico.exe
+C:\Users\USUARIO1\Dropbox\TECNOLÓGICO\VII Semestre\Compiladores\Proyectos\MiniCSharp-Parte2Contextual\AnalizadorSintactico\bin\Debug\AnalizadorSintactico.pdb
+C:\Users\USUARIO1\Dropbox\TECNOLÓGICO\VII Semestre\Compiladores\Proyectos\MiniCSharp-Parte2Contextual\AnalizadorSintactico\bin\Debug\Antlr4.Runtime.dll
+C:\Users\USUARIO1\Dropbox\TECNOLÓGICO\VII Semestre\Compiladores\Proyectos\MiniCSharp-Parte2Contextual\AnalizadorSintactico\bin\Debug\FastColoredTextBox.dll
+C:\Users\USUARIO1\Dropbox\TECNOLÓGICO\VII Semestre\Compiladores\Proyectos\MiniCSharp-Parte2Contextual\AnalizadorSintactico\bin\Debug\Antlr4.Runtime.xml
+C:\Users\USUARIO1\Dropbox\TECNOLÓGICO\VII Semestre\Compiladores\Proyectos\MiniCSharp-Parte2Contextual\AnalizadorSintactico\bin\Debug\FastColoredTextBox.xml
+C:\Users\USUARIO1\Dropbox\TECNOLÓGICO\VII Semestre\Compiladores\Proyectos\MiniCSharp-Parte2Contextual\AnalizadorSintactico\obj\Debug\AnalizadorSintactico.csprojResolveAssemblyReference.cache
+C:\Users\USUARIO1\Dropbox\TECNOLÓGICO\VII Semestre\Compiladores\Proyectos\MiniCSharp-Parte2Contextual\AnalizadorSintactico\obj\Debug\AnalizadorSintactico.csproj.Antlr4GeneratedCodeFileListAbsolute.txt
+C:\Users\USUARIO1\Dropbox\TECNOLÓGICO\VII Semestre\Compiladores\Proyectos\MiniCSharp-Parte2Contextual\AnalizadorSintactico\obj\Debug\AnalisisSintactico.Form1.resources
+C:\Users\USUARIO1\Dropbox\TECNOLÓGICO\VII Semestre\Compiladores\Proyectos\MiniCSharp-Parte2Contextual\AnalizadorSintactico\obj\Debug\AnalizadorSintactico.csproj.GenerateResource.Cache

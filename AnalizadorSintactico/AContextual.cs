@@ -523,6 +523,7 @@ class AContextual : Parser1BaseVisitor<Object>
     {
         context.CONDICION_IF();
         context.PIZQ();
+        //Entrando el retorno es falso
         tRetorno = false;
      
             Visit(context.condition());
@@ -530,12 +531,33 @@ class AContextual : Parser1BaseVisitor<Object>
          try
         {
             context.PDER();
-            Visit(context.statement(0));
+
             if (context.CONDICION_ELSE() != null)
             {
-                Visit(context.statement(1));
+                //Si existe else significa que puede que exista retorno en los dos
+                tRetorno = true;
             }
-            tRetorno = true;
+            Visit(context.statement(0));
+
+             
+            if (context.CONDICION_ELSE() != null)
+            {
+                // En el else se erifica que el if tuviera return
+                if (retornoFun == false)
+                {
+                //En caso de no ser asi ya no existe posibilidad deque el retorno sea correcto
+                    tRetorno = false;
+                }
+                else {
+                // De lo contrarios la variable retorno se vuelve al estado original
+                    retornoFun = false;
+                // Y la posibilidad de que el retorno se presente vuelve a ser positivo
+                    tRetorno = true;
+                }
+                Visit(context.statement(1));
+                tRetorno = true;
+            }
+           
          } 
         catch(Exception e){
             tRetorno = true;
@@ -1194,7 +1216,7 @@ class AContextual : Parser1BaseVisitor<Object>
                 return tipoARet;
             }
             else {
-                throw new Exception("Linea: " + context.ID(0).Symbol.Line + "-> Variable" + context.ID(0).GetText()+ " no es tipo clase");
+                throw new Exception("Linea: " + context.ID(0).Symbol.Line + "-> Variable " + context.ID(0).GetText()+ " no es tipo clase");
            
             }
               
