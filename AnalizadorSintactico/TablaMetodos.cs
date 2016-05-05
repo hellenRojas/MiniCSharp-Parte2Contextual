@@ -41,7 +41,7 @@ public class TablaMetodos
         listaMetodos.Add(token);
     }
    
-    // Este metodo es una basura
+
     public ElementoMet buscarPNombre(String nombre)
     {
         ElementoMet elemP = (ElementoMet)listaMetodos.Find(x => ((ElementoMet)x).nombre == nombre);

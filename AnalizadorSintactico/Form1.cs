@@ -344,6 +344,7 @@ namespace AnalisisSintactico
                     v.Visit(tree);
 
                     error.AppendText(v.msgError);
+                    
                     error.AppendText("Fin de compilación...\n");
 
                 }

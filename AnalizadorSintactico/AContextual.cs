@@ -91,7 +91,7 @@ class AContextual : Parser1BaseVisitor<Object>
 
             if (tipoC1 != "int" && tipoC1 != "char")
             {
-                Console.WriteLine("Tipo no permitido: " + tipoC1);
+           
                 msgError = msgError + "Linea: " + context.CONSTANTE().Symbol.Line + "-> Tipo no permitido: " + tipoC1 + "\n";
                 return null;
             }
@@ -124,7 +124,7 @@ class AContextual : Parser1BaseVisitor<Object>
         }
         catch (Exception e)
         {
-            Console.WriteLine(e.Message);
+
             msgError = msgError + e.Message + "\n";
         };
 
@@ -202,6 +202,7 @@ class AContextual : Parser1BaseVisitor<Object>
         {
 
             msgError = msgError + "Linea: " + context.ID().Symbol.Line + "-> " + "La clase " + context.ID().GetText() + " ya esta definida" + "\n";
+            tablaActual = 0;
 
         }
         else
@@ -237,7 +238,7 @@ class AContextual : Parser1BaseVisitor<Object>
         // VALIDAR SI YA EXISTE
         if (tableMethods.buscarPNombre(idMethod) != null)
         {
-            Console.WriteLine("Ya existe un método con el id " + idMethod); // si el método ya existe retorna null
+     
             msgError = msgError + "Linea: " + context.ID().Symbol.Line + "-> " + "Ya existe un método con el id " + idMethod + "\n";
 
             return null;
@@ -522,7 +523,7 @@ class AContextual : Parser1BaseVisitor<Object>
         }
         catch (Exception e)
         {
-            Console.WriteLine(e.Message);
+     
             msgError = msgError + e.Message + "\n";
         }
         return null;
@@ -611,7 +612,7 @@ class AContextual : Parser1BaseVisitor<Object>
         catch (Exception e)
         {
             tRetorno = true;
-            Console.WriteLine(e.Message);
+ 
             msgError = msgError + e.Message + "\n";
         }
         return null;
@@ -633,7 +634,7 @@ class AContextual : Parser1BaseVisitor<Object>
         catch (Exception e)
         {
             tRetorno = true;
-            Console.WriteLine(e.Message);
+
             msgError = msgError + e.Message + "\n";
         }
         return null;
@@ -665,7 +666,7 @@ class AContextual : Parser1BaseVisitor<Object>
         catch (Exception e)
         {
             tRetorno = true;
-            Console.WriteLine(e.Message);
+
             msgError = msgError + e.Message + "\n";
 
         }
@@ -690,7 +691,7 @@ class AContextual : Parser1BaseVisitor<Object>
 
         catch (Exception e)
         {
-            Console.WriteLine(e.Message);
+
             msgError = msgError + e.Message + "\n";
         }
         return null;
@@ -708,7 +709,7 @@ class AContextual : Parser1BaseVisitor<Object>
 
         catch (Exception e)
         {
-            Console.WriteLine(e.Message);
+
             msgError = msgError + e.Message + "\n";
         }
         return null;
@@ -731,7 +732,7 @@ class AContextual : Parser1BaseVisitor<Object>
         }
         catch (Exception e)
         {
-            Console.WriteLine(e.Message);
+
             msgError = msgError + e.Message + "\n";
         }
         return null;
@@ -1072,7 +1073,7 @@ class AContextual : Parser1BaseVisitor<Object>
             }
             else
             {
-                var = "int";
+                throw new Exception("Linea: " + context.ID().Symbol.Line + "-> " + "No se puede hacer new del tipo int");
             }
         }
         else if (context.ID().GetText() == "char")
@@ -1090,9 +1091,12 @@ class AContextual : Parser1BaseVisitor<Object>
             }
             else
             {
-                var = "char";
+                throw new Exception("Linea: " + context.ID().Symbol.Line + "-> " + "No se puede hacer new del tipo char");
+           
+               
             }
         }
+        
         else if (context.ID().GetText() == "float")
         {
             if (context.PCUADRADO_IZQ() != null)
@@ -1104,14 +1108,14 @@ class AContextual : Parser1BaseVisitor<Object>
             }
             else
             {
-                var = "float";//preguntar si se puede instanciar int,float,char
+                throw new Exception("Linea: " + context.ID().Symbol.Line + "-> " + "No se puede hacer new del tipo float");
             }
         }
         else if (context.ID().GetText() == "boolean")
         {
             if (context.PCUADRADO_IZQ() != null)
             {
-                throw new Exception("Linea: " + context.ID().Symbol.Line + "-> " + "Error no existen arreglos tipo boolean");
+                throw new Exception("Linea: " + context.ID().Symbol.Line + "-> " + "No se puede hacer new  del tipo boolean");
             }
 
         }
